@@ -888,14 +888,82 @@ and in each iteration store the current sum in a variable (starting from 0). Aft
 GOOD LUCK 😀
 */
 
+// Solution 1
+// misunderstood whats the purpose of the objects here.. it should be "john" & "mark"  howewer, it works.
+
+var johnsBills = {
+    sums: [124, 48, 268, 180, 42],
+    tips: [],
+    sumsWithTips: [],
+    calculateTip: function(){
+        for (var i = 0; i < this.sums.length; i++){
+            var currentSum = this.sums[i];
+            var tipPercentage;
+            // John likes to tip 20% of the bill when the bill is less than $50, 15% when the bill is between $50
+            // and $200, and 10% if the bill is more than $200.
+            if(currentSum < 50){
+                tipPercentage = .2;
+            }else if(currentSum > 50 && currentSum < 200){
+                tipPercentage = .15;
+            }else{
+                tipPercentage = .1;
+            }
+            this.tips[i] = (currentSum * tipPercentage);
+            this.sumsWithTips[i] = ((currentSum * tipPercentage) + currentSum);
+        }
+    }
+}
 
 
+// ================================
+// Solution 2 - Extra
 
+function calcArrNumbersAverage($arr){
+    var sum = 0;
+    var i = 0;
+    while(i < $arr.length){
+        sum = sum + $arr[i];
+        i++;
+    }
+    console.log(sum / $arr.length);
+}
 
+var marksBills = {
+    // Hint: issue in the video .. he uses 475 instead of 375, so the results differ.
+    sums: [77, 375, 110, 45],
+    tips: [],
+    sumsWithTips: [],
+    calculateTip: function(){
+        for (var i = 0; i < this.sums.length; i++){
+            var currentSum = this.sums[i];
+            var tipPercentage;
+            // Mark likes to tip 20% of the bill when the bill is less than $100, 10% when the bill is between $100
+            // and $300, and 25% if the bill is more than $300 (different than John).
+            if(currentSum < 100){
+                tipPercentage = .2;
+            }else if(currentSum > 100 && currentSum < 300){
+                tipPercentage = .1;
+            }else{
+                tipPercentage = .25;
+            }
+            this.tips[i] = (currentSum * tipPercentage);
+            this.sumsWithTips[i] = ((currentSum * tipPercentage) + currentSum);
+        }
+    }
+}
 
+console.log('The families:');
+johnsBills.calculateTip();
+marksBills.calculateTip();
 
+console.log(johnsBills);
+console.log(marksBills);
 
+console.log('Tip average - Johns family:');
+calcArrNumbersAverage(johnsBills.tips);
 
+console.log('Tip average - Marks family:');
+calcArrNumbersAverage(marksBills.tips);
 
 
 
